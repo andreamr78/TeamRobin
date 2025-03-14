@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState, type FormEvent, type ChangeEvent } from 'react';
 import logo from "../assets/images/logo.svg";
+import Auth from '../utils/auth';
+import { login } from '../api/authAPI';
+import type { UserLogin } from '../interfaces/UserLogin';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
+  // State to store login data
+  const [loginData, setLoginData] = useState<UserLogin>({
+    username: '',
+    password: '',
+  });
+
+  // State to store error messages
+  const [error, setError] = useState<string | null>(null);
+
+  // Handle changes in input fields
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      const data = await login(loginData);
+      Auth.login(data.token);
+    } catch (err) {
+      console.error('Failed to login', err);
+      setError('Failed to login: ' + (err as Error).message);
+    }
+  };
+
   return (
     <div 
       className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
@@ -18,19 +54,34 @@ const Home: React.FC = () => {
                   <img src={logo} alt="Dream Holiday Logo" className="img-fluid" style={{ maxWidth: "100px" }} />
                 </div>
                 <h2 className="text-center fw-bold">Log In</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label className="form-label">Username:</label>
-                    <input type="text" className="form-control" placeholder="Enter username" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="username"
+                      value={loginData.username || ''}
+                      onChange={handleChange}
+                      placeholder="Enter username"
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Password:</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="password"
+                      value={loginData.password || ''}
+                      onChange={handleChange}
+                      placeholder="Enter password"
+                    />
                   </div>
                   <button type="submit" className="btn btn-primary w-100">
                     Log In
                   </button>
                 </form>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <p className="text-center mt-3">
                   Don’t have an account? <a href="/signup" className="text-primary">Sign Up!</a>
                 </p>
@@ -61,4 +112,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;
