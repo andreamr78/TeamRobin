@@ -1,8 +1,11 @@
 import React from 'react'
-
+import WeatherWidget from './components/WeatherWidget'
 function App() {
+  var city = 'Chicago'
   return (
-    <div>App</div>
+    <div>
+      <WeatherWidget city={city}/>
+    </div>
   )
 }
 
