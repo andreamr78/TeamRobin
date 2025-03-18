@@ -73,14 +73,15 @@ Through this project, developers gain experience in agile development methodolog
 - Read and write reviews about travel destinations.
 
 ## Team Members
+- Andrea
 - María Azucena
 - Merari
-- Oscar
 - Gustavo
-- Rodrigo
 - Jorge
 - Josias
-- Andrea
+- Oscar
+- Rodrigo
+
 
 ## Contribution
 Contributions are welcome! If you'd like to contribute:
