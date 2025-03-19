@@ -1,3 +1,3 @@
-import Profile from './Profile.js';
+import User from '../models/User';
 
-export { Profile };
+export default { User };

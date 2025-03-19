@@ -1,24 +1,39 @@
 import jwt from 'jsonwebtoken';
-import type { Request } from 'express';
+import { GraphQLError } from 'graphql';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// Set the expiration time for the token
-const expiration = '2h';
-// Set the secret key for the token
-const secret = process.env.JWT_SECRET || 'superdupersecretkey';
+export const authenticateToken = ({ req }: any) => {
+  let token = req.body.token || req.query.token || req.headers.authorization;
 
-// Function to sign a token
-export const signToken = (payload: object): string => {
-    return jwt.sign(payload, secret, { expiresIn: expiration });
+  if (req.headers.authorization) {
+    token = token.split(' ').pop().trim();
+  }
+
+  if (!token) {
+    return req;
+  }
+
+  try {
+    const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2hr' });
+    req.user = data;
+  } catch (err) {
+    console.log('Invalid token');
+  }
+
+  return req;
 };
 
-// Function to verify a token
-export const authenticateToken = (req: Request): object | null => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) return null;
-    try {
-        return jwt.verify(token, secret);
-    } catch (err) {
-        console.error('Invalid token: ', err);
-        return null;
-    }
+export const signToken = (username: string, email: string, _id: unknown) => {
+  const payload = { username, email, _id };
+  const secretKey: any = process.env.JWT_SECRET_KEY;
+
+  return jwt.sign({ data: payload }, secretKey, { expiresIn: '2h' });
+};
+
+export class AuthenticationError extends GraphQLError {
+  constructor(message: string) {
+    super(message, undefined, undefined, undefined, ['UNAUTHENTICATED']);
+    Object.defineProperty(this, 'name', { value: 'AuthenticationError' });
+  }
 };
