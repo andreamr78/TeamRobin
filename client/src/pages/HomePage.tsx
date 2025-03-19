@@ -38,6 +38,11 @@ const HomePage: React.FC = () => {
     }
   };
 
+
+  //agregar buscador
+  //mandar a llamar a la travelApi
+  //formatear la data
+  //mostrar en las tarjetas
   return (
     <div 
       className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
