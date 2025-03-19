@@ -1,11 +1,9 @@
 import React from 'react'
-import WeatherWidget from './components/WeatherWidget'
+import SignUp from './pages/SignUp'
+
 function App() {
-  var city = 'Chicago'
   return (
-    <div>
-      <WeatherWidget city={city}/>
-    </div>
+    <div><SignUp></SignUp></div>
   )
 }
 
