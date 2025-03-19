@@ -4,7 +4,7 @@ import logo from '../assets/images/logo.svg'
 //import { login } from '../api/authAPI';
 //import type { UserLogin } from '../interfaces/UserLogin';
 
-const HomePage: React.FC = () => {
+function StartPage(){
   // State to store login data
   const [loginData, setLoginData] = useState<any>({
     username: '',
@@ -117,4 +117,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default StartPage;
