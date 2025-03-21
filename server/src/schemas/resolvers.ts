@@ -35,6 +35,14 @@ const resolvers = {
         // If the user is not authenticated, throw an AuthenticationError
         throw new AuthenticationError('Could not authenticate user.');
         },
+      getSavedDestinations: async (_: any, __: any, context: any) => {
+        if (!context.user) {
+          throw new AuthenticationError('Not logged in');
+        }
+    
+        const user = await User.findById(context.user._id).select('savedDestinations');
+        return user?.savedDestinations || [];
+      },
       },
 
     Mutation: {
@@ -78,11 +86,13 @@ const resolvers = {
           throw new AuthenticationError('Not logged in');
         }
   
-        return User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
           { $addToSet: { savedDestinations: travelData } },
           { new: true, runValidators: true }
         );
+  
+        return updatedUser;
       },
       
       removeDestination: async (_: any, { travelId }: { travelId: string }, context: any) => {
