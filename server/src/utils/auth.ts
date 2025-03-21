@@ -11,14 +11,19 @@ export const authenticateToken = ({ req }: any) => {
   }
 
   if (!token) {
-    return req;
+    throw new AuthenticationError('No token');
   }
 
   try {
-    const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2hr' });
+    const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2h' });
     req.user = data;
   } catch (err) {
-    console.log('Invalid token');
+    if (err instanceof Error) {
+      console.error('Bad token:', err.message);
+    } else {
+      console.error('Bad token:', err);
+    }
+    throw new AuthenticationError('wrong or expired token');
   }
 
   return req;
@@ -26,14 +31,18 @@ export const authenticateToken = ({ req }: any) => {
 
 export const signToken = (username: string, email: string, _id: unknown) => {
   const payload = { username, email, _id };
-  const secretKey: any = process.env.JWT_SECRET_KEY;
+  const secretKey = process.env.JWT_SECRET_KEY;
+
+  if (!secretKey) {
+    throw new Error('JWT_SECRET_KEY is not defined');
+  }
 
   return jwt.sign({ data: payload }, secretKey, { expiresIn: '2h' });
 };
 
 export class AuthenticationError extends GraphQLError {
   constructor(message: string) {
-    super(message, undefined, undefined, undefined, ['UNAUTHENTICATED']);
+    super(message, undefined, undefined, undefined, ['Authentication error']);
     Object.defineProperty(this, 'name', { value: 'AuthenticationError' });
   }
 };
