@@ -6,7 +6,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    savedDestinations: [Destinations]
+    savedDestinations: [Travel]
   }
 
   input UserInput {
@@ -28,9 +28,9 @@ const typeDefs = gql`
     travelId: String
     location: String
     description: String
-    ticketPrice: String
+    flightPrice: String
     hotelPrice: String
-    link: String
+    thumbnail: String
   }
     
   type Auth {
@@ -40,6 +40,7 @@ const typeDefs = gql`
     
   type Query {
     me: User
+    getSavedDestinations: [Travel]
   }
 
   type Mutation {

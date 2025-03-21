@@ -19,4 +19,6 @@ router.route('/login').post(login);
 
 router.route('/destinations/:travelId').delete(authenticateToken, deleteDestination);
 
+router.route('/destinations').post(authenticateToken, saveDestination);
+
 export default router;

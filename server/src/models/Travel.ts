@@ -15,27 +15,26 @@ const destinationsSchema = new Schema<TravelDocument>({
         type: String,
         required: true,
     },
-    location:{
+    location: {
         type: String,
         required: true,
     },
-    description:{
+    description: {
         type: String,
         required: true,
     },
-    ticketPrice:{
+    ticketPrice: {
         type: String,
         required: true,
     },
-    hotelPrice:{
+    hotelPrice: {
         type: String,
         required: true,
     },
-    link:{
+    link: {
         type: String,
         required: true,
     }
- 
 });
 
 export default destinationsSchema;
