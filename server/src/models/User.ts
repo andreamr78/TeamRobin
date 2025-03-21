@@ -1,6 +1,6 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import destinationsSchema, { TravelDocument } from './Travel';
+import destinationsSchema, { TravelDocument } from './Travel.js';
 
 export interface UserDocument extends Document {
   _id: string;
