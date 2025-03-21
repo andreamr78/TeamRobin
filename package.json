@@ -15,6 +15,7 @@
   },
   "keywords": [],
   "devDependencies": {
+    "@types/node": "^22.13.10",
     "concurrently": "^8.2.0"
   },
   "dependencies": {
