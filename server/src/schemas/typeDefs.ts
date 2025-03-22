@@ -6,7 +6,7 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    savedDestinations: [Travel!]
+    savedDestinations: [Travel]
   }
 
   input UserInput {
