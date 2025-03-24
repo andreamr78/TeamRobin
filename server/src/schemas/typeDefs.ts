@@ -16,19 +16,29 @@ const typeDefs = gql`
   }
 
   input travelInput {
-    travelId: String
-    photos: string
-    description: string
-    country: string
-    city: string
+    travelId: Float
+    photos: String[]
+    price: Float
+    description: String
+    weather: Float
+    activities: Float[]
+    videos: any[]
+    temperature: Float
+    country: String
+    city: String
   }
 
   type Travel {
-    travelId: String
-    photos: string
-    description: string
-    country: string
-    city: string
+    travelId: Float
+    photos: String[]
+    price: Float
+    description: String
+    weather: Float
+    activities: Float[]
+    videos: any[]
+    temperature: Float
+    country: String
+    city: String
   }
     
   type Auth {

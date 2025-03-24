@@ -53,7 +53,7 @@ export const saveDestination = async (req: Request, res: Response) => {
 export const deleteDestination = async (req: Request, res: Response) => {
   const updatedUser = await User.findOneAndUpdate(
     { _id: req.user._id },
-    { $pull: { savedBooks: { bookId: req.params.bookId } } },
+    { $pull: { savedDestinations: { travelId: req.params.travelId } } },
     { new: true }
   );
   if (!updatedUser) {

@@ -4,9 +4,7 @@ export interface Travel {
     price: number
     description: string
     weather: number
-    //longitude: number
     activities: number[]
-    //id: number
     videos: any[]
     temperature: number
     country: string

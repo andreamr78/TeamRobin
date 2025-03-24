@@ -14,7 +14,7 @@ export const getSavedDestinationsIds = () => {
     }
   };
   
-  export const removeDestinationId = (TravelId: string) => {
+  export const removeDestinationId = (TravelId: number) => {
     const savedDestinationsIds = localStorage.getItem('saved_destinations')
       ? JSON.parse(localStorage.getItem('saved_destinations')!)
       : null;
@@ -23,7 +23,7 @@ export const getSavedDestinationsIds = () => {
       return false;
     }
   
-    const updatedSavedDestinationsIds = savedDestinationsIds?.filter((savedDestinationsIds: string) => savedDestinationsIds !== TravelId);
+    const updatedSavedDestinationsIds = savedDestinationsIds?.filter((savedDestinationsIds: number) => savedDestinationsIds !== TravelId);
     localStorage.setItem('saved_destinations', JSON.stringify(updatedSavedDestinationsIds));
   
     return true;
