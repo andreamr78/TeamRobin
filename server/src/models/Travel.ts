@@ -1,37 +1,62 @@
 import { Schema, type Document } from 'mongoose';
 
 export interface TravelDocument extends Document {
-    travelId: String
-    location: String
+    travelId: Float64Array
+    photos: String[]
+    price: Float64Array
     description: String
-    ticketPrice: String
-    hotelPrice: String
-    link: String
+    weather: Float64Array
+    activities: Float64Array[]
+    videos: String[]
+    temperature: Float64Array
+    country: String
+    city: String
 }
 
-// This is a subdocument schema, it won't become its own model but we'll use it as the schema for the User's `savedBooks` array in User.js
 const destinationsSchema = new Schema<TravelDocument>({
     travelId: {
+        type: Float64Array,
+        required: true,
+    },
+    photos: [
+        {
+            type: String,
+            required: true,
+        }
+    ],
+    price: {
+        type: Float64Array,
+        required: true,
+    },
+    description: {
         type: String,
         required: true,
     },
-    location:{
+    weather: {
+        type: Float64Array,
+        required: true,
+    },
+    activities: [
+        {
+            type: Float64Array,
+            required: true,
+        }
+    ],
+    videos: [
+        {
+            type: String,
+            required: true,
+        }
+    ],
+    temperature: {
+        type: Float64Array,
+        required: true,
+    },
+    country: {
         type: String,
         required: true,
     },
-    description:{
-        type: String,
-        required: true,
-    },
-    ticketPrice:{
-        type: String,
-        required: true,
-    },
-    hotelPrice:{
-        type: String,
-        required: true,
-    },
-    link:{
+    city: {
         type: String,
         required: true,
     }
