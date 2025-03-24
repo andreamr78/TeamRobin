@@ -1,8 +1,14 @@
 export interface Travel {
-    travelId: string
-    location: string
+    travelId: number
+    photos: string[]
+    price: number
     description: string
-    ticketPrice: string
-    hotelPrice: string
-    link: string
+    weather: number
+    //longitude: number
+    activities: number[]
+    //id: number
+    videos: any[]
+    temperature: number
+    country: string
+    city: string
   }

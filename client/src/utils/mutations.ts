@@ -45,8 +45,8 @@ export const SAVE_DESTINATION = gql`
 `;
 
 export const REMOVE_DESTINATION = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
+  mutation removeDestination($travelId: String!) {
+    removeDestination(travelId: $travelId) {
       _id
       username
       email

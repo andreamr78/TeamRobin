@@ -1,9 +1,6 @@
 
-import { getJson } from "serpapi";
-
 import type { User } from '../models/User.js';
 import type { Travel } from "../models/Travel.js";
-//import type { Book } from '../models/Book.js';
 
 // route to get logged in user's info (needs the token)
 export const getMe = (token: string) => {
@@ -56,18 +53,6 @@ export const deleteDestination = (travelId: string, token: string) => {
     },
   });
 };
-
-export const TravelApi = (query: string) => {
-    const travelKey = `54f44bc9e11031710e5525a2dba78f352213e895619bfe58e923fa51432979af`
-    getJson({
-        engine: "google",
-        q: {query},
-        api_key: travelKey
-      }, (json) => {
-        console.log(json["popular_destinations"]);
-        return json;
-    });
-}
 
 export const WeatherApi = (query: string) => {
     const weather_key= `a42a725b6106c5b620e98e324cf76cd4`;

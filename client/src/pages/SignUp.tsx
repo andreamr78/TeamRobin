@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SignUp.css";
+//import "./SignUp.css";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -42,7 +42,8 @@ function SignUp() {
 
   return (
     <div className="sign-up-page">
-      <div className="sign-up-form">
+      hellos
+      {/* <div className="sign-up-form">
         <h1>
           <b>Sign Up</b>
         </h1>
@@ -81,7 +82,7 @@ function SignUp() {
           </button>
         </form>
         {message && <p>{message}</p>}
-      </div>
+      </div> */}
     </div>
   );
 }

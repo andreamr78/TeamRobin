@@ -1,6 +1,6 @@
 import React from 'react'
 
-function InfoCards() {
+function InfoCards(props:any[]) {
   return (
     <div>InfoCards</div>
   )

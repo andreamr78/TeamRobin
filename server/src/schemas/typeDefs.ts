@@ -17,20 +17,18 @@ const typeDefs = gql`
 
   input travelInput {
     travelId: String
-    location: String
-    description: String
-    ticketPrice: String
-    hotelPrice: String
-    link: String
+    photos: string
+    description: string
+    country: string
+    city: string
   }
 
   type Travel {
     travelId: String
-    location: String
-    description: String
-    ticketPrice: String
-    hotelPrice: String
-    link: String
+    photos: string
+    description: string
+    country: string
+    city: string
   }
     
   type Auth {
