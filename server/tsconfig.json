@@ -8,7 +8,7 @@
       "outDir": "dist" /* Specify an output folder for all emitted files. */,
       
       /* Type Roots */
-      "typeRoots": ["./node_modules/@types", "./types"],
+      "typeRoots": ["./node_modules/@types", "./types", "types/express/index.d.ts"] ,
       "moduleResolution": "node",
       "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,

@@ -5,10 +5,8 @@ import { useMutation } from '@apollo/client';
 
 //arreglar el logo
 
-function StartPage(){
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // const [validated] = useState(false);
-  // const [showAlert, setShowAlert] = useState(false);
+function StartPage() {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +17,6 @@ function StartPage(){
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -27,23 +24,18 @@ function StartPage(){
     }
 
     try {
-      //const response = await loginUser(userFormData);
       const { data } = await loginUser({
-        variables: {...userFormData }
+        variables: { ...userFormData }, // Send email and password
       });
 
       Auth.login(data.login.token);
-
     } catch (err) {
       console.error(err);
-      //setShowAlert(true);
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
-      //savedBooks: [],
     });
   };
 
@@ -65,14 +57,15 @@ function StartPage(){
                 <h2 className="text-center fw-bold">Log In</h2>
                 <form onSubmit={handleFormSubmit}>
                   <div className="mb-3">
-                    <label className="form-label">Username:</label>
+                    <label className="form-label">Email:</label>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control"
-                      name="username"
-                      value={userFormData.username || ''}
+                      name="email"
+                      value={userFormData.email || ''}
                       onChange={handleInputChange}
-                      placeholder="Enter username"
+                      placeholder="Enter email"
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -84,6 +77,7 @@ function StartPage(){
                       value={userFormData.password || ''}
                       onChange={handleInputChange}
                       placeholder="Enter password"
+                      required
                     />
                   </div>
                   <button type="submit" className="btn btn-primary w-100">

@@ -1,4 +1,3 @@
-// see SignupForm.js for comments
 import React, { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -8,9 +7,8 @@ import Auth from '../utils/auth';
 import type { User } from '../models/User.js';
 import { LOGIN_USER } from '../utils/mutations.js'; // Import LOGIN_USER mutation
 
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({}: { handleModalClose: () => void }) => {
-    const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedDestinations: [] });
+  const [userFormData, setUserFormData] = useState<User>({ email: '', password: '', savedDestinations: [] }); // Removed username
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -18,11 +16,12 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setUserFormData({ ...userFormData, [name]: value }); 
   };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    //console.log(userFormData); // Debugging: Check if email and password are populated
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -47,7 +46,6 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
       savedDestinations: [],
@@ -63,7 +61,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
         <Form.Group className='mb-3'>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
-            type='text'
+            type='email'
             placeholder='Your email'
             name='email'
             onChange={handleInputChange}
