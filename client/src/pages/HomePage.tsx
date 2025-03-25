@@ -8,7 +8,7 @@ import { SAVE_DESTINATION } from '../utils/mutations';
 import { getSavedDestinationsIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
-//import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 import {
   Container,
@@ -91,10 +91,16 @@ function HomePage() {
                 ? 'This destination has already been saved!'
                 : 'Save this!'}
             </Button>
-
             <Button>
-              see more
-              {/* <Link to='/location'> See More</Link> */}
+              <Link to={item.city} state={{item: item}}> See More</Link>
+              {/* <Link to={{ 
+                pathname: `/home/${item.city}`, 
+                item: {
+                  title: post.title, 
+                  content: post.content,
+                  comments: JSON.stringify(post.comments)
+                } 
+              }}>See More</Link> */}
             </Button>
         </div>
         </Card>
