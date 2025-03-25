@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
 import HomePage from './pages/HomePage.js'
-import SavedPages from './pages/SavedPages.js'
+import SavedPages from './pages/SavedPlaces.js'
 import IndividualPage from './pages/IndividualPage.js'
 import SignUp from './pages/SignUp.js'
 import StartPage from './pages/StartPage.js'

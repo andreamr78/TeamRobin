@@ -5,7 +5,7 @@ import { REMOVE_DESTINATION } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeDestinationId } from '../utils/localStorage';
 
-function SavedPages() {
+function SavedPlaces() {
   const { loading, data } = useQuery(GET_ME);
   const [removeTravel] = useMutation(REMOVE_DESTINATION);
   const userData = data?.me || {
@@ -43,8 +43,8 @@ function SavedPages() {
     return <h2>LOADING...</h2>;
   }
   return (
-    <div>SavedPages</div>
+    <div>SavedPlaces</div>
   )
 }
 
-export default SavedPages
+export default SavedPlaces
