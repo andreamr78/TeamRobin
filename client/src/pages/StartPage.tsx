@@ -2,13 +2,10 @@ import React, { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
+import '../styles/StartPage.css'; 
 
-//arreglar el logo
-
-function StartPage(){
+function StartPage() {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // const [validated] = useState(false);
-  // const [showAlert, setShowAlert] = useState(false);
   const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +16,6 @@ function StartPage(){
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -27,40 +23,34 @@ function StartPage(){
     }
 
     try {
-      //const response = await loginUser(userFormData);
       const { data } = await loginUser({
-        variables: {...userFormData }
+        variables: { ...userFormData }
       });
 
       Auth.login(data.login.token);
 
     } catch (err) {
       console.error(err);
-      //setShowAlert(true);
     }
 
     setUserFormData({
       username: '',
       email: '',
       password: '',
-      //savedBooks: [],
     });
   };
 
   return (
-    <div 
-      className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
-      style={{ backgroundImage: "url('/background.jpg')" }}
-    >
+    <div className="d-flex justify-content-center align-items-center vh-100 background"> {/* Apply the CSS class */}
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-8">
             <div className="row bg-light bg-opacity-75 p-4 rounded shadow-lg">
               
               {/* Left: Login Form */}
-              <div className="col-md-6 d-flex flex-column justify-content-center p-4">
+              <div className="col-md-6 d-flex flex-column justify-content-center p-4 glass-card login-card">
                 <div className="text-center mb-3">
-                  <img alt="Dream Holiday Logo" className="img-fluid" style={{ maxWidth: "100px" }} />
+                  <img src="/logo.svg" alt="Dream Holiday Logo" className="img-fluid" style={{ maxWidth: '100px' }} />
                 </div>
                 <h2 className="text-center fw-bold">Log In</h2>
                 <form onSubmit={handleFormSubmit}>
@@ -90,7 +80,6 @@ function StartPage(){
                     Log In
                   </button>
                 </form>
-                {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
                 <p className="text-center mt-3">
                   Don't have an account? <a href="/signup" className="text-primary">Sign Up!</a>
                 </p>
@@ -119,6 +108,6 @@ function StartPage(){
       </div>
     </div>
   );
-};
+}
 
 export default StartPage;
