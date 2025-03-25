@@ -2,12 +2,11 @@ import "../assets/styles/homePage.css";
 import React, { useEffect, useState } from "react";
 import data from "../assets/places.json";
 import InfoCards from "../components/InfoCards";
-//import type { travelFormat, TravelJson } from '../models/TravelJson';
-import { Travel } from "../models/Travel";
-import { SAVE_DESTINATION } from "../utils/mutations";
-import { getSavedDestinationsIds } from "../utils/localStorage";
-import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
+import { Travel } from '../models/Travel';
+import { SAVE_DESTINATION } from '../utils/mutations';
+import { getSavedDestinationsIds } from '../utils/localStorage';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
 import { Link } from "react-router-dom";
 
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
@@ -69,34 +68,27 @@ function HomePage() {
   return (
     <Container>
       <div id="product-featured-box">
-        {searchedTravel.map((item, i) => {
-          return (
-            <Card key={i} id="card-style">
-              <InfoCards data={item} />
-              <div>
-                <Button
-                  disabled={savedDestinationId?.some(
-                    (savedDestinationId: number) =>
-                      savedDestinationId === item.travelId
-                  )}
-                  className="btn-block btn-info"
-                  onClick={() => handleSave(item.travelId)}
-                >
-                  {savedDestinationId?.some(
-                    (savedDestinationId: number) =>
-                      savedDestinationId === item.travelId
-                  )
-                    ? "This destination has already been saved!"
-                    : "Save this!"}
-                </Button>
-                <Link to={"/location/"+item.travelId}>
-                  <Button>See More</Button>
-                </Link>
-              </div>
-            </Card>
-          );
-        })}
-      </div>
+      {searchedTravel.map((item, i) => {
+        return (
+          <Card key={i} id='card-style'>
+          <InfoCards data={item}/>
+          <div>
+          <Button
+              disabled={savedDestinationId?.some((savedDestinationId: number) => savedDestinationId === item.travelId)}
+              className='btn-block btn-info'
+              onClick={() => handleSave(item.travelId)}>
+              {savedDestinationId?.some((savedDestinationId: number) => savedDestinationId === item.travelId)
+                ? 'This destination has already been saved!'
+                : 'Save this!'}
+            </Button>
+            <Button>
+              <Link to={item.city} state={{item: item}}> See More</Link>
+            </Button>
+        </div>
+        </Card>
+        )
+      })}
+    </div>
     </Container>
   );
 }
