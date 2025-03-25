@@ -1,40 +1,32 @@
-import '../assets/styles/homePage.css'
-import React, { useEffect, useState } from 'react'
-import data from '../assets/places.json'
-import InfoCards from '../components/InfoCards'
+import "../assets/styles/homePage.css";
+import React, { useEffect, useState } from "react";
+import data from "../assets/places.json";
+import InfoCards from "../components/InfoCards";
 //import type { travelFormat, TravelJson } from '../models/TravelJson';
-import { Travel } from '../models/Travel';
-import { SAVE_DESTINATION } from '../utils/mutations';
-import { getSavedDestinationsIds } from '../utils/localStorage';
-import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-//import { Link } from "react-router";
+import { Travel } from "../models/Travel";
+import { SAVE_DESTINATION } from "../utils/mutations";
+import { getSavedDestinationsIds } from "../utils/localStorage";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { Link } from "react-router-dom";
 
-import {
-  Container,
-  Col,
-  Form,
-  Button,
-  Card,
-  Row
-} from 'react-bootstrap';
+import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 function HomePage() {
-
   const [searchedTravel, setSearchedTravels] = useState<Travel[]>([]);
   // create state for holding our search field data
   const [saveDestination] = useMutation(SAVE_DESTINATION);
   // create state to hold saved bookId values
-  const [savedDestinationId, setSavedDestinationId] = useState(getSavedDestinationsIds());
+  const [savedDestinationId, setSavedDestinationId] = useState(
+    getSavedDestinationsIds()
+  );
 
   useEffect(() => {
     formatData();
-  }, [])
-  
+  }, []);
 
-  function formatData (){
-
-    let destinations = data.map((item : Travel) => {
+  function formatData() {
+    let destinations = data.map((item: Travel) => {
       return {
         travelId: item.travelId,
         photos: item.photos,
@@ -45,16 +37,17 @@ function HomePage() {
         videos: item.videos,
         temperature: item.temperature,
         country: item.country,
-        city: item.city
-      }
+        city: item.city,
+      };
     });
 
     setSearchedTravels(destinations);
-
   }
 
   const handleSave = async (travelId: number) => {
-    const destToSave: any = searchedTravel.find((item) => item.travelId === travelId)!;
+    const destToSave: any = searchedTravel.find(
+      (item) => item.travelId === travelId
+    )!;
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -63,7 +56,6 @@ function HomePage() {
     }
 
     try {
- 
       await saveDestination({
         variables: { travelData: destToSave },
       });
@@ -73,36 +65,40 @@ function HomePage() {
     } catch (err) {
       console.error(err);
     }
-
-  }
+  };
   return (
     <Container>
       <div id="product-featured-box">
-      {searchedTravel.map((item, i) => {
-        return (
-          <Card key={i} id='card-style'>
-          <InfoCards data={item}/>
-          <div>
-          <Button
-              disabled={savedDestinationId?.some((savedDestinationId: number) => savedDestinationId === item.travelId)}
-              className='btn-block btn-info'
-              onClick={() => handleSave(item.travelId)}>
-              {savedDestinationId?.some((savedDestinationId: number) => savedDestinationId === item.travelId)
-                ? 'This destination has already been saved!'
-                : 'Save this!'}
-            </Button>
-
-            <Button>
-              see more
-              {/* <Link to='/location'> See More</Link> */}
-            </Button>
-        </div>
-        </Card>
-        )
-      })}
-    </div>
+        {searchedTravel.map((item, i) => {
+          return (
+            <Card key={i} id="card-style">
+              <InfoCards data={item} />
+              <div>
+                <Button
+                  disabled={savedDestinationId?.some(
+                    (savedDestinationId: number) =>
+                      savedDestinationId === item.travelId
+                  )}
+                  className="btn-block btn-info"
+                  onClick={() => handleSave(item.travelId)}
+                >
+                  {savedDestinationId?.some(
+                    (savedDestinationId: number) =>
+                      savedDestinationId === item.travelId
+                  )
+                    ? "This destination has already been saved!"
+                    : "Save this!"}
+                </Button>
+                <Link to={"/location/"+item.travelId}>
+                  <Button>See More</Button>
+                </Link>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
     </Container>
-  )
+  );
 }
 
 export default HomePage;
