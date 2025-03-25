@@ -1,10 +1,6 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { TravelDocument } from './Travel';
-import destinationsSchema from './Travel';
-// import schema from Book.js
-//import bookSchema from './Book.js';
-//import type { BookDocument } from './Book.js';
+import destinationsSchema, { TravelDocument } from './Travel.js';
 
 export interface UserDocument extends Document {
   _id: string;
@@ -13,7 +9,6 @@ export interface UserDocument extends Document {
   password: string;
   savedDestinations: TravelDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
-  //bookCount: number;
 }
 
 const userSchema = new Schema<UserDocument>(
@@ -33,10 +28,9 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
+    // Use destinationsSchema for savedDestinations
     savedDestinations: [destinationsSchema],
   },
-  // set this to use virtual below
   {
     toJSON: {
       virtuals: true,
@@ -44,21 +38,19 @@ const userSchema = new Schema<UserDocument>(
   }
 );
 
-// hash user password
+// Hash user password before saving
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
 
-// custom method to compare and validate password for logging in
+// Custom method to compare and validate password for logging in
 userSchema.methods.isCorrectPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
-
 
 const User = model<UserDocument>('User', userSchema);
 

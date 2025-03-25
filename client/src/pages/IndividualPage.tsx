@@ -1,7 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import CommentCard from "../components/CommentCard";
+import CommentPopup from "../components/CommentPopup";
+import TravelCard from "../components/TravelCard";
+
+function IndividualPage() {
+  const [showModal, setShowModal] = useState(false);
+  const [storeValue, setStoreValue] = useState([]);
+  const [location, setLocation] = useState("Beautiful Destination");
+  const [imageUrl, setImageUrl] = useState("https://example.com/image.jpg");
+  const [description, setDescription] = useState("This is a detailed description of the location.");
 
   useEffect(() => {
-    const script = document.createElement('script');
+    const comments = localStorage.getItem("comments");
+    if (comments) {
+      setStoreValue(JSON.parse(comments));
+    }
+  }, []);
+
+  const handleClick = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    // Refresh state or trigger data re-fetch instead of reloading.
+  };
+
+  useEffect(() => {
+    const script = document.createElement("script");
     script.src = "https://cdn.logwork.com/widget/currency_converter.js";
     script.async = true;
     document.body.appendChild(script);
@@ -10,23 +36,8 @@ import React, { useEffect } from 'react';
     };
   }, []);
 
-  type TravelCardProps = {
-    location: string;
-    description: string;
-    airfare: string;
-    accommodation: string;
-    temperature: string;
-    weather: string;
-    imageUrl: string;
-  };
-
-  const TravelCard: React.FC<TravelCardProps> = ({
-    location,
-    description,
-    imageUrl,
-  }) => {
   const handleSeeMore = () => {
-    console.log("See More button clicked!"); 
+    alert("See more details!");
   };
 
   return (
@@ -44,21 +55,38 @@ import React, { useEffect } from 'react';
       >
         Currency Converter
       </a>
+      {storeValue.map(({ username, comment, starRating }, index) => (
+        <CommentCard
+          username={username}
+          review={comment}
+          starRating={starRating}
+          key={`${username}-${starRating}-${index}`}
+        />
+      ))}
+      <button
+        type="button"
+        className="btn btn-primary btn-lg"
+        onClick={handleClick}
+      >
+        Add Review
+      </button>
+      <CommentPopup show={showModal} handleClose={handleClose} />
     </div>
   );
-};
+}
 
 const styles = {
   card: {
     border: "1px solid #ccc",
     borderRadius: "8px",
     padding: "16px",
-    maxWidth: "350px",
+    maxWidth: "600px",
     fontFamily: "Arial, sans-serif",
+    margin: "0 auto",
   },
   location: {
     margin: "0 0 8px",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
   },
   image: {
     width: "100%",
@@ -77,39 +105,6 @@ const styles = {
     borderRadius: "5px",
     cursor: "pointer",
   },
-  details: {
-    marginTop: "12px",
-    fontSize: "0.9rem",
-  },
 };
-
-export default TravelCard;
-
-// }
-
-//   return (
-//     <div>
-//       <div>IndividualPage</div>
-//       <div style={styles.card}>
-//       <img src={imageUrl} alt={destination} style={styles.image} />
-//       <h2>{destination}</h2>
-//       <p>{description}</p>
-//       <div style={styles.section}>
-//         <h3>Travel Costs</h3>
-//         <p>{travelCosts.perPerson} per person</p>
-//         <p>{travelCosts.perNight} per night</p>
-//         <Button variant="primary" onClick={moreInfo}>See More</Button>
-//       </div>
-//       <div style={styles.section}>
-//         <h3>Money Exchange</h3>
-//         <p>{moneyExchange}</p>
-//       </div>
-//        <a href="https://logwork.com/free-currency-converter-calculator" className="currency_convertor" 
-//         data-currencies="USD,EUR,JPY,GBP,CNY,INR">
-//         Currency Converter
-//        </a>
-//     </div>
-//   );
-// }
 
 export default IndividualPage;

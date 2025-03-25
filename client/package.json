@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run clean && vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",
+    "axios": "^1.8.4",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
     "graphql": "^16.10.0",
