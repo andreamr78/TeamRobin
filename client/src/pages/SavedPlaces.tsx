@@ -4,6 +4,9 @@ import { GET_ME } from '../utils/queries';
 import { REMOVE_DESTINATION } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeDestinationId } from '../utils/localStorage';
+import InfoCards from '../components/InfoCards';
+import { Card, Button, Container } from 'react-bootstrap';
+import '../assets/styles/homePage.css'
 
 function SavedPlaces() {
   const { loading, data } = useQuery(GET_ME);
@@ -14,7 +17,7 @@ function SavedPlaces() {
     password: '',
     savedDestinations: [],
   };
-  const userDataLength = Object.keys(userData).length;
+  //const userDataLength = Object.keys(userData).length;
   const handleDelete = async (travelId: number) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -34,16 +37,28 @@ function SavedPlaces() {
     }
   };
 
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
-
-  // if data isn't here yet, say so
-  if (!userDataLength) {
-    return <h2>LOADING...</h2>;
-  }
   return (
-    <div>SavedPlaces</div>
+   <div>
+     <Container>
+      <div id="product-featured-box">
+      {userData.savedDestinations.map((item:any) => {
+        return (
+          <Card id='card-style'>
+          <InfoCards data={item}/>
+          <div>
+          <Button
+              className='btn-block btn-danger'
+              onClick={() => handleDelete(item.travelId)}
+            >
+              Delete this!
+            </Button>
+        </div>
+        </Card>
+        )
+      })}
+    </div>
+    </Container>
+   </div>
   )
 }
 
