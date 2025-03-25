@@ -1,3 +1,4 @@
+import { Travel } from "./Travel";
 
 export interface User {
   username: string | null;
