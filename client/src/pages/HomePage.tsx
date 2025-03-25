@@ -50,9 +50,7 @@ function HomePage() {
       {searchedTravel.map((item, i) => (
         <div key={i}>
           <h1>{item.city}</h1>
-          {/* Uncomment if you want to use InfoCards */}
-          {/* <InfoCards props={item} /> */}
-
+          <InfoCards props={item} />
           <Button
             disabled={savedDestinationId.includes(item.travelId)}
             className="btn-block btn-info"
