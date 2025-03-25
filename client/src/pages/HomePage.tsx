@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TopBar from '../components/TopBar';
 import InfoCards from '../components/InfoCards';
+
+interface TopBarProps {
+    searchQuery: string;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const TopBar: React.FC<TopBarProps> = ({ searchQuery, setSearchQuery }) => {
+    return (
+        <div>
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+            />
+        </div>
+    );
+};
 
 const HomePage = () => {
     const [cards, setCards] = useState([]);
@@ -50,3 +67,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
