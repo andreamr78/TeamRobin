@@ -1,63 +1,70 @@
 import type { Request, Response } from 'express';
-// import user model
 import User from '../models/User.js';
-// import sign token function from auth
 import { signToken } from '../utils/auth.js';
 
-
-// create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
+// Create a user, sign a token, and send it back
 export const createUser = async (req: Request, res: Response) => {
-  const user = await User.create(req.body);
+  try {
+    const user = await User.create(req.body);
 
-  if (!user) {
-    return res.status(400).json({ message: 'Something is wrong!' });
+    if (!user) {
+      return res.status(400).json({ message: 'Something is wrong' });
+    }
+
+    const token = signToken(user.username, user.email, user._id);
+    return res.json({ token, user });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'server error' });
   }
-  const token = signToken(user.username, user.password, user._id);
-  return res.json({ token, user });
 };
 
-// login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
-// {body} is destructured req.body
+// Login a user, sign a token, and send it back
 export const login = async (req: Request, res: Response) => {
-  const user = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
-  if (!user) {
-    return res.status(400).json({ message: "Can't find this user" });
-  }
+  try {
+    const user = await User.findOne({ $or: [{ username: req.body.username }, { email: req.body.email }] });
 
-  const correctPw = await user.isCorrectPassword(req.body.password);
+    if (!user) {
+      return res.status(400).json({ message: "Can't find this user" });
+    }
 
-  if (!correctPw) {
-    return res.status(400).json({ message: 'Wrong password!' });
+    const correctPw = await user.isCorrectPassword(req.body.password);
+
+    if (!correctPw) {
+      return res.status(400).json({ message: 'Wrong login info' });
+    }
+
+    const token = signToken(user.username, user.email, user._id);
+    return res.json({ token, user });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'server error' });
   }
-  const token = signToken(user.username, user.password, user._id);
-  return res.json({ token, user });
 };
 
-// save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
-// user comes from `req.user` created in the auth middleware function
+// Save a destination to a user's `savedDestinations` field
 export const saveDestination = async (req: Request, res: Response) => {
   try {
+    if (!req.user) {
+      return res.status(400).json({ message: 'User information is missing' });
+    }
+
     const updatedUser = await User.findOneAndUpdate(
       { _id: req.user._id },
       { $addToSet: { savedDestinations: req.body } },
       { new: true, runValidators: true }
     );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Couldn't find user" });
+    }
+
     return res.json(updatedUser);
   } catch (err) {
-    console.log(err);
-    return res.status(400).json(err);
+    console.error(err);
+    return res.status(500).json({ message: 'server error' });
   }
 };
 
-// remove a book from `savedBooks`
-export const deleteDestination = async (req: Request, res: Response) => {
-  const updatedUser = await User.findOneAndUpdate(
-    { _id: req.user._id },
-    { $pull: { savedDestinations: { travelId: req.params.travelId } } },
-    { new: true }
-  );
-  if (!updatedUser) {
-    return res.status(404).json({ message: "Couldn't find user with this id!" });
   }
-  return res.json(updatedUser);
 };

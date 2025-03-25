@@ -1,27 +1,27 @@
 import { gql } from '@apollo/client';
 
 export const LOGIN_USER = gql`
-  mutation loginUser($email: String!, $password: String!) {
+  mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
+      token
       user {
         _id
         username
         email
       }
-      token
     }
   }
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($input: UserInput!) {
-    addUser(input: $input) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
+      token
       user {
         _id
         username
         email
       }
-      token
     }
   }
 `;
@@ -34,29 +34,37 @@ export const SAVE_DESTINATION = gql`
       email
       savedDestinations {
         travelId
-        location
+        photos
+        price
         description
-        ticketPrice
-        hotelPrice
-        link
+        weather
+        activities
+        videos
+        temperature
+        country
+        city
       }
     }
   }
 `;
 
 export const REMOVE_DESTINATION = gql`
-  mutation removeDestination($travelId: String!) {
+  mutation removeDestination($travelId: Float!) {
     removeDestination(travelId: $travelId) {
       _id
       username
       email
       savedDestinations {
         travelId
-        location
+        photos
+        price
         description
-        ticketPrice
-        hotelPrice
-        link
+        weather
+        activities
+        videos
+        temperature
+        country
+        city
       }
     }
   }

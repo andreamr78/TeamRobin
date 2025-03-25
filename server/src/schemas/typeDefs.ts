@@ -48,13 +48,14 @@ const typeDefs = gql`
     
   type Query {
     me: User
+    getSavedDestinations: [Travel]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(input: UserInput!): Auth
     saveDestination(travelData: travelInput!): User
-    removeDestination(travelId: String!): User
+    removeDestination(travelId: Float!): User
   }
 
 `;

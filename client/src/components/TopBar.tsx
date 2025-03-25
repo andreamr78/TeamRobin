@@ -1,9 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-function TopBar() {
-  return (
-    <div>TopBar</div>
-  )
+interface TopBarProps {
+    searchQuery: string;
+    setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default TopBar
+const TopBar: React.FC<TopBarProps> = ({ searchQuery, setSearchQuery }) => {
+    return (
+        <div>
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+            />
+        </div>
+    );
+};
+
+export default TopBar;
