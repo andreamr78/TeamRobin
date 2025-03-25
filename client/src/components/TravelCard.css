@@ -1,0 +1,40 @@
+.travel-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 350px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .travel-card-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .travel-card-location {
+    margin: 0 0 8px;
+    font-size: 1.5rem;
+  }
+  
+  .travel-card-description {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .travel-card-airfare,
+  .travel-card-accommodation,
+  .travel-card-temperature,
+  .travel-card-weather {
+    margin-top: 12px;
+    font-size: 0.9rem;
+  }
+  
+  .travel-card-button {
+    padding: 10px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
