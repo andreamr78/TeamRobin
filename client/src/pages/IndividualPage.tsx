@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CommentCard from "../components/CommentCard";
 import CommentPopup from "../components/CommentPopup";
 
-function IndividualPage() {
+function IndividualPage({item}) {
   const [showModal, setShowModal] = useState(false);
   const [storeValue, setStoreValue] = useState([]);
 

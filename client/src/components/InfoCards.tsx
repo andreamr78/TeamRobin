@@ -22,3 +22,4 @@ function InfoCards(data:any) {
 }
 
 export default InfoCards
+
