@@ -35,7 +35,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
     try {
       const { data } = await addUserMutation({
-        variables: { ...userFormData },
+        variables: { input: { ...userFormData } }, // Wrap userFormData in input
       });
 
       if (!data?.addUser.token) {
