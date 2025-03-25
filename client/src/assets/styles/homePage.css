@@ -1,0 +1,11 @@
+#product-featured-box {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+#card-style{
+    width: fit-content;
+    height: fit-content;
+    margin: 20px;
+    padding: 10px;
+}
