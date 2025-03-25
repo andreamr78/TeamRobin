@@ -1,5 +1,5 @@
 import React from "react";
- import "./TravelCard.css";
+
  
  type TravelCardProps = {
    location: string;
