@@ -50,7 +50,7 @@ function SavedPlaces() {
               className='btn-block btn-danger'
               onClick={() => handleDelete(item.travelId)}
             >
-              Delete this Book!
+              Delete this!
             </Button>
         </div>
         </Card>
