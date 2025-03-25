@@ -3,10 +3,15 @@ import CommentCard from "../components/CommentCard";
 import CommentPopup from "../components/CommentPopup";
 import TravelCard from "../components/TravelCard";
 import { useLocation } from "react-router-dom";
+import WeatherWidget from "../components/WeatherWidget";
+import '../assets/styles/individualPage.css'
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { useNavigate} from "react-router-dom";
 
 function IndividualPage() {
   const {state} = useLocation();
   console.log(state.item);
+  let navigate = useNavigate();
   // const data = JSON.parse(state);
   const newTemp = parseFloat(state.item.temperature).toFixed(2);
   const [showModal, setShowModal] = useState(false);
@@ -44,73 +49,87 @@ function IndividualPage() {
   }, []);
 
   return (
-    <div style={styles.card}>
-      <TravelCard
-        location= {`${state.item.city}, ${state.item.country}`}
-        description={state.item.description}
-        airfare={`$ ${newValue} USD`}
-        accommodation={`$ ${newValue} USD`}
-        temperature={`${newTemp}°C`}
-        weather="Sunny"
-        imageUrl={imageUrl}
-      />
-      <a
-        href="https://logwork.com/free-currency-converter-calculator"
-        className="currency_convertor"
-        data-currencies="USD,EUR,JPY,GBP,CNY,INR"
-      >
-        Currency Converter
-      </a>
-      {storeValue.map(({ username, comment, starRating }, index) => (
-        <CommentCard
-          username={username}
-          review={comment}
-          starRating={starRating}
-          key={`${username}-${starRating}-${index}`}
-        />
-      ))}
-      <button
-        type="button"
-        className="btn btn-primary btn-lg"
-        onClick={handleClick}
-      >
-        Add Review
-      </button>
-      <CommentPopup show={showModal} handleClose={handleClose} />
+    <div className="wholePage">
+      <Button onClick={() => navigate(-1)}>Back</Button> 
+      <Row>
+          <Col className="col-1">
+          <Card id="travel-card">
+            <TravelCard
+                location= {`${state.item.city}, ${state.item.country}`}
+                description={state.item.description}
+                airfare={`$ ${newValue} USD`}
+                accommodation={`$ ${newValue} USD`}
+                temperature={`${newTemp}°C`}
+                weather="Sunny"
+                imageUrl={imageUrl}
+              />
+        </Card>
+        </Col>
+        <Col className="col-2">
+          <a
+            href="https://logwork.com/free-currency-converter-calculator"
+            className="currency_convertor"
+            data-currencies="USD,EUR,JPY,GBP,CNY,INR"
+          >
+            Currency Converter
+          </a>
+          <WeatherWidget city={state.item.city}/>
+          <div className="btn-div">
+            <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={handleClick}
+              >
+                Add Review
+              </button>
+            </div>
+      </Col>
+    </Row>
+    <Row className="btn-row">
+    {storeValue.map(({ username, comment, starRating }, index) => (
+          <CommentCard
+            username={username}
+            review={comment}
+            starRating={starRating}
+            key={`${username}-${starRating}-${index}`}
+          />
+        ))}
+        <CommentPopup show={showModal} handleClose={handleClose} />
+    </Row>
     </div>
   );
 }
 
-const styles = {
-  card: {
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    padding: "16px",
-    maxWidth: "600px",
-    fontFamily: "Arial, sans-serif",
-    margin: "0 auto",
-  },
-  location: {
-    margin: "0 0 8px",
-    fontSize: "2rem",
-  },
-  image: {
-    width: "100%",
-    borderRadius: "8px",
-    marginBottom: "8px",
-  },
-  description: {
-    fontSize: "1rem",
-    marginBottom: "8px",
-  },
-  button: {
-    padding: "10px 16px",
-    backgroundColor: "#007BFF",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-};
+// const styles = {
+//   card: {
+//     border: "1px solid #ccc",
+//     borderRadius: "8px",
+//     padding: "16px",
+//     maxWidth: "600px",
+//     fontFamily: "Arial, sans-serif",
+//     margin: "0 auto",
+//   },
+//   location: {
+//     margin: "0 0 8px",
+//     fontSize: "2rem",
+//   },
+//   image: {
+//     width: "100%",
+//     borderRadius: "8px",
+//     marginBottom: "8px",
+//   },
+//   description: {
+//     fontSize: "1rem",
+//     marginBottom: "8px",
+//   },
+//   button: {
+//     padding: "10px 16px",
+//     backgroundColor: "#007BFF",
+//     color: "white",
+//     border: "none",
+//     borderRadius: "5px",
+//     cursor: "pointer",
+//   },
+// };
 
 export default IndividualPage;
