@@ -1,5 +1,5 @@
 import React from "react";
- import "./TravelCard.css";
+ //import "./TravelCard.css";
  
  type TravelCardProps = {
    location: string;
@@ -26,7 +26,7 @@ import React from "react";
  
    return (
      <div className="travel-card">
-       <img src={imageUrl} alt={location} className="travel-card-image" />
+       <img src={imageUrl} alt={location} style={{width:'560px'}} className="travel-card-image" />
        <h2 className="travel-card-location">{location}</h2>
        <p className="travel-card-description">{description}</p>
        <p className="travel-card-airfare">Airfare: {airfare}</p>
