@@ -1,0 +1,33 @@
+.wholePage{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 12%;
+}
+
+.col-1{
+    width: 50%;
+}
+
+.col-2{
+    width: 50%;
+    align-content: center;
+    justify-content: center;
+}
+
+
+#travel-card{
+    width: fit-content;
+    padding: 20px;
+}
+
+.btn-row{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.btn-div{
+    margin-top: 20px;
+}
