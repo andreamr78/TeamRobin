@@ -1,4 +1,3 @@
-import type  {Travel}  from './Travel.js';
 
 export interface User {
   username: string | null;

@@ -66,26 +66,5 @@ export const saveDestination = async (req: Request, res: Response) => {
   }
 };
 
-// Remove a destination from `savedDestinations`
-export const deleteDestination = async (req: Request, res: Response) => {
-  try {
-    if (!req.user) {
-      return res.status(400).json({ message: 'User information is missing' });
-    }
-
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: req.user._id },
-      { $pull: { savedDestinations: { travelId: req.params.travelId } } },
-      { new: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ message: "Couldn't find user" });
-    }
-
-    return res.json(updatedUser);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: 'server error' });
   }
 };

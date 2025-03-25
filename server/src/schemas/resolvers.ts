@@ -16,11 +16,15 @@ interface LoginUserArgs {
 
 interface addDestinationArgs{
   travelData:{
-    location: String
-    description: String
-    ticketPrice: String
-    hotelPrice: String
-    link: String
+    photos: string[]
+    price: number
+    description: string
+    weather: number
+    activities: number[]
+    videos: any[]
+    temperature: number
+    country: string
+    city: string
   }
 }
 
