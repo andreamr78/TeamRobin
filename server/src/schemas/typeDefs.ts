@@ -16,21 +16,29 @@ const typeDefs = gql`
   }
 
   input travelInput {
-    travelId: String
-    location: String
+    travelId: Float
+    photos: String[]
+    price: Float
     description: String
-    ticketPrice: String
-    hotelPrice: String
-    link: String
+    weather: Float
+    activities: Float[]
+    videos: any[]
+    temperature: Float
+    country: String
+    city: String
   }
 
   type Travel {
-    travelId: String
-    location: String
+    travelId: Float
+    photos: String[]
+    price: Float
     description: String
-    flightPrice: String
-    hotelPrice: String
-    thumbnail: String
+    weather: Float
+    activities: Float[]
+    videos: any[]
+    temperature: Float
+    country: String
+    city: String
   }
     
   type Auth {
@@ -47,7 +55,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addUser(input: UserInput!): Auth
     saveDestination(travelData: travelInput!): User
-    removeDestination(travelId: String!): User
+    removeDestination(travelId: Float!): User
   }
 
 `;

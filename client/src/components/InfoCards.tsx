@@ -1,16 +1,5 @@
 import React from 'react';
 
-interface InfoCardsProps {
-    cards: Array<{
-        travelId: string;
-        location: string;
-        description: string;
-        ticketPrice: string;
-        hotelPrice: string;
-        link: string;
-    }>;
-}
-
 const InfoCards: React.FC<InfoCardsProps> = ({ cards }) => {
     return (
         <div className="cards-container">

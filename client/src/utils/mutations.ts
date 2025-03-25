@@ -25,3 +25,47 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const SAVE_DESTINATION = gql`
+  mutation saveDestination($travelData: travelInput!) {
+    saveDestination(travelData: $travelData) {
+      _id
+      username
+      email
+      savedDestinations {
+        travelId
+        photos
+        price
+        description
+        weather
+        activities
+        videos
+        temperature
+        country
+        city
+      }
+    }
+  }
+`;
+
+export const REMOVE_DESTINATION = gql`
+  mutation removeDestination($travelId: Float!) {
+    removeDestination(travelId: $travelId) {
+      _id
+      username
+      email
+      savedDestinations {
+        travelId
+        photos
+        price
+        description
+        weather
+        activities
+        videos
+        temperature
+        country
+        city
+      }
+    }
+  }
+`;
