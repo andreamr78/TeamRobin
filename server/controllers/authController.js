@@ -1,4 +1,3 @@
-import express from "express";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -19,7 +18,8 @@ export const register = async (req, res) => {
 
     res.status(201).json({ message: "Usuario registrado exitosamente" });
   } catch (error) {
-    res.status(500).json({ error: error.message || "Error en el servidor" });
+    console.error("Error en register:", error);
+    res.status(500).json({ error: "Error en el servidor" });
   }
 };
 
@@ -34,10 +34,12 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
     const secretKey = process.env.JWT_SECRET || "default_secret";
+
     const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "1h" });
 
     res.json({ message: "Login exitoso", token });
   } catch (error) {
-    res.status(500).json({ error: error.message || "Error en el servidor" });
+    console.error("Error en login:", error);
+    res.status(500).json({ error: "Error en el servidor" });
   }
 };
