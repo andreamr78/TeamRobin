@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-
+import './SignUp.css';
 import Auth from '../utils/auth.js';
 import type { User } from '../models/User.js';
 import { ADD_USER } from '../utils/mutations.js'; // Import the ADD_USER mutation
