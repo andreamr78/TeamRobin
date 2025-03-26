@@ -100,36 +100,4 @@ function IndividualPage() {
   );
 }
 
-// const styles = {
-//   card: {
-//     border: "1px solid #ccc",
-//     borderRadius: "8px",
-//     padding: "16px",
-//     maxWidth: "600px",
-//     fontFamily: "Arial, sans-serif",
-//     margin: "0 auto",
-//   },
-//   location: {
-//     margin: "0 0 8px",
-//     fontSize: "2rem",
-//   },
-//   image: {
-//     width: "100%",
-//     borderRadius: "8px",
-//     marginBottom: "8px",
-//   },
-//   description: {
-//     fontSize: "1rem",
-//     marginBottom: "8px",
-//   },
-//   button: {
-//     padding: "10px 16px",
-//     backgroundColor: "#007BFF",
-//     color: "white",
-//     border: "none",
-//     borderRadius: "5px",
-//     cursor: "pointer",
-//   },
-// };
-
 export default IndividualPage;

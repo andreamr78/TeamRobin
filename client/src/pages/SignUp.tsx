@@ -60,9 +60,9 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
 
   return (
-    <>
+    <div className='sign-up-page'>
     {/* This is needed for the validation functionality above */}
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleFormSubmit} className='sign-up-form'>
       {/* show alert if server response is bad */}
       <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
         Something went wrong with your signup!
@@ -113,7 +113,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         Submit
       </Button>
     </Form>
-  </>
+  </div>
   );
 }
 
