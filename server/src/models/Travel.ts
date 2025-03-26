@@ -1,21 +1,21 @@
 import { Schema, type Document } from 'mongoose';
 
 export interface TravelDocument extends Document {
-    travelId: Float64Array
+    travelId: Number
     photos: String[]
-    price: Float64Array
+    price: Number
     description: String
-    weather: Float64Array
-    activities: Float64Array[]
+    weather: Number
+    activities: Number[]
     videos: String[]
-    temperature: Float64Array
+    temperature: Number
     country: String
     city: String
 }
 
 const destinationsSchema = new Schema<TravelDocument>({
     travelId: {
-        type: Float64Array,
+        type: Number,
         required: true,
     },
     photos: [
@@ -25,7 +25,7 @@ const destinationsSchema = new Schema<TravelDocument>({
         }
     ],
     price: {
-        type: Float64Array,
+        type: Number,
         required: true,
     },
     description: {
@@ -33,12 +33,12 @@ const destinationsSchema = new Schema<TravelDocument>({
         required: true,
     },
     weather: {
-        type: Float64Array,
+        type: Number,
         required: true,
     },
     activities: [
         {
-            type: Float64Array,
+            type: Number,
             required: true,
         }
     ],
@@ -49,7 +49,7 @@ const destinationsSchema = new Schema<TravelDocument>({
         }
     ],
     temperature: {
-        type: Float64Array,
+        type: Number,
         required: true,
     },
     country: {

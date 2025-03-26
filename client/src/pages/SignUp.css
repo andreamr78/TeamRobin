@@ -10,7 +10,7 @@
 .sign-up-form {
     background-color: rgb(255, 255, 255);
     width: 35rem;
-    height: 40rem;
+    height: fit-content;
     padding: 6rem;
     border-radius: 5%;
 }

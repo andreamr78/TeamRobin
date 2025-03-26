@@ -13,16 +13,17 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    savedDestinations: [travelInput]
   }
 
   input travelInput {
     travelId: Float
-    photos: String[]
+    photos: [String]
     price: Float
     description: String
     weather: Float
-    activities: Float[]
-    videos: any[]
+    activities: [Float]
+    videos: [String]
     temperature: Float
     country: String
     city: String
@@ -30,12 +31,12 @@ const typeDefs = gql`
 
   type Travel {
     travelId: Float
-    photos: String[]
+    photos: [String]
     price: Float
     description: String
     weather: Float
-    activities: Float[]
-    videos: any[]
+    activities: [Float]
+    videos: [String]
     temperature: Float
     country: String
     city: String

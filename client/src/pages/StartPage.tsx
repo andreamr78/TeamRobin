@@ -2,13 +2,11 @@ import React, { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
-
+import '../assets/styles/login.css'
 //arreglar el logo
 
-function StartPage(){
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // const [validated] = useState(false);
-  // const [showAlert, setShowAlert] = useState(false);
+function StartPage() {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +17,6 @@ function StartPage(){
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -27,34 +24,26 @@ function StartPage(){
     }
 
     try {
-      //const response = await loginUser(userFormData);
       const { data } = await loginUser({
-        variables: {...userFormData }
+        variables: { ...userFormData }, // Send email and password
       });
 
       Auth.login(data.login.token);
-
     } catch (err) {
       console.error(err);
-      //setShowAlert(true);
     }
 
     setUserFormData({
-      username: '',
       email: '',
       password: '',
-      //savedBooks: [],
     });
   };
 
   return (
-    <div 
-      className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
-      style={{ backgroundImage: "url('/background.jpg')" }}
-    >
-      <div className="container">
+    <div className="container-1">
+      <div>
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-md-8 cards-container">
             <div className="row bg-light bg-opacity-75 p-4 rounded shadow-lg">
               
               {/* Left: Login Form */}
@@ -65,14 +54,15 @@ function StartPage(){
                 <h2 className="text-center fw-bold">Log In</h2>
                 <form onSubmit={handleFormSubmit}>
                   <div className="mb-3">
-                    <label className="form-label">Username:</label>
+                    <label className="form-label">Email:</label>
                     <input
-                      type="text"
+                      type="email"
                       className="form-control"
-                      name="username"
-                      value={userFormData.username || ''}
+                      name="email"
+                      value={userFormData.email || ''}
                       onChange={handleInputChange}
-                      placeholder="Enter username"
+                      placeholder="Enter email"
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -84,6 +74,7 @@ function StartPage(){
                       value={userFormData.password || ''}
                       onChange={handleInputChange}
                       placeholder="Enter password"
+                      required
                     />
                   </div>
                   <button type="submit" className="btn btn-primary w-100">

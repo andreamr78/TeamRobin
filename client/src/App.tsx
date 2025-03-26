@@ -1,4 +1,3 @@
-
 //import './App.css';
 import {
   ApolloClient,
@@ -12,7 +11,7 @@ import TopBar from './components/TopBar';
 import React from 'react';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql', // Ensure this matches the server's endpoint
 });
 
 const authLink = setContext((_, { headers }) => {

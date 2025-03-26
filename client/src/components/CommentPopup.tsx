@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CommentPopup.css";
+import { Alert } from "react-bootstrap";
 
 function CommentPopup({
   show,
@@ -36,6 +37,9 @@ function CommentPopup({
     setComment("");
     setStarRating(0);
     handleClose();
+
+    alert("Thank you for your comment!");
+    window.location.reload();
 
     // TO DO Activar cuando el endpoint esté listo
 
