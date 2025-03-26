@@ -10,6 +10,7 @@ import Auth from '../utils/auth';
 import { Link } from "react-router-dom";
 
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
+import TopBar from "../components/TopBar";
 
 function HomePage() {
   const [searchedTravel, setSearchedTravels] = useState<Travel[]>([]);
@@ -48,25 +49,28 @@ function HomePage() {
       (item) => item.travelId === travelId
     )!;
 
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+    // if (!token) {
+    //   return false;
+    // }
 
-    try {
-      await saveDestination({
-        variables: { travelData: destToSave },
-      });
+    setSavedDestinationId([...savedDestinationId, destToSave.travelId]);
 
-      setSavedDestinationId([...savedDestinationId, destToSave.travelId]);
-      console.log(savedDestinationId);
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   await saveDestination({
+    //     variables: { travelData: destToSave },
+    //   });
+
+    //   setSavedDestinationId([...savedDestinationId, destToSave.travelId]);
+    //   //console.log(savedDestinationId);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
   return (
     <Container>
+      <TopBar />
       <div id="product-featured-box">
       {searchedTravel.map((item, i) => {
         return (

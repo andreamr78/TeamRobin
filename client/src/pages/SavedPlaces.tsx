@@ -7,6 +7,7 @@ import { removeDestinationId } from '../utils/localStorage';
 import InfoCards from '../components/InfoCards';
 import { Card, Button, Container } from 'react-bootstrap';
 import '../assets/styles/homePage.css'
+import TopBar from '../components/TopBar';
 
 function SavedPlaces() {
   const {  data } = useQuery(GET_ME);
@@ -39,6 +40,7 @@ function SavedPlaces() {
 
   return (
    <div>
+      <TopBar />
      <Container>
       <div id="product-featured-box">
       {userData.savedDestinations.map((item:any) => {

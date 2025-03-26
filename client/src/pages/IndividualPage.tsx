@@ -7,6 +7,7 @@ import WeatherWidget from "../components/WeatherWidget";
 import '../assets/styles/individualPage.css'
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate} from "react-router-dom";
+import TopBar from "../components/TopBar";
 
 function IndividualPage() {
   const {state} = useLocation();
@@ -50,6 +51,7 @@ function IndividualPage() {
 
   return (
     <div className="wholePage">
+      <TopBar />
       <Button onClick={() => navigate(-1)}>Back</Button> 
       <Row>
           <Col className="col-1">
@@ -99,37 +101,5 @@ function IndividualPage() {
     </div>
   );
 }
-
-// const styles = {
-//   card: {
-//     border: "1px solid #ccc",
-//     borderRadius: "8px",
-//     padding: "16px",
-//     maxWidth: "600px",
-//     fontFamily: "Arial, sans-serif",
-//     margin: "0 auto",
-//   },
-//   location: {
-//     margin: "0 0 8px",
-//     fontSize: "2rem",
-//   },
-//   image: {
-//     width: "100%",
-//     borderRadius: "8px",
-//     marginBottom: "8px",
-//   },
-//   description: {
-//     fontSize: "1rem",
-//     marginBottom: "8px",
-//   },
-//   button: {
-//     padding: "10px 16px",
-//     backgroundColor: "#007BFF",
-//     color: "white",
-//     border: "none",
-//     borderRadius: "5px",
-//     cursor: "pointer",
-//   },
-// };
 
 export default IndividualPage;

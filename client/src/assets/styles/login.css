@@ -1,8 +1,11 @@
 /* General container for the homepage */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
+.container-1{
+    width: 100vw;
+    height: 100vh;
+    background: url("/beach1.jpg");
+    background-position: center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   
   /* Cards container for InfoCards */
@@ -11,7 +14,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    margin-top: 30px;
+    margin-top: 50px;
   }
   
   /* Style each card wrapper */

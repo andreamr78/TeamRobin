@@ -6,6 +6,7 @@ import './SignUp.css';
 import Auth from '../utils/auth.js';
 import type { User } from '../models/User.js';
 import { ADD_USER } from '../utils/mutations.js'; // Import the ADD_USER mutation
+import { Link, Navigate } from 'react-router-dom';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const SignupForm = ({}: { handleModalClose: () => void }) => {
@@ -60,9 +61,9 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
 
   return (
-    <>
+    <div className='sign-up-page'>
     {/* This is needed for the validation functionality above */}
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleFormSubmit} className='sign-up-form'>
       {/* show alert if server response is bad */}
       <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
         Something went wrong with your signup!
@@ -110,10 +111,10 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         disabled={!(userFormData.username && userFormData.email && userFormData.password)}
         type='submit'
         variant='success'>
-        Submit
+          <Link to='/home'>Submit</Link>
       </Button>
     </Form>
-  </>
+  </div>
   );
 }
 

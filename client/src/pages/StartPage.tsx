@@ -2,7 +2,8 @@ import React, { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
-
+import '../assets/styles/login.css'
+import { Link } from 'react-router-dom';
 //arreglar el logo
 
 function StartPage() {
@@ -40,19 +41,16 @@ function StartPage() {
   };
 
   return (
-    <div 
-      className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
-      style={{ backgroundImage: "url('/background.jpg')" }}
-    >
-      <div className="container">
+    <div className="container-1">
+      <div>
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-md-8 cards-container">
             <div className="row bg-light bg-opacity-75 p-4 rounded shadow-lg">
               
               {/* Left: Login Form */}
               <div className="col-md-6 d-flex flex-column justify-content-center p-4">
                 <div className="text-center mb-3">
-                  <img alt="Dream Holiday Logo" className="img-fluid" style={{ maxWidth: "100px" }} />
+                  <img alt="Dream Holiday Logo" className="img-fluid" src='logo.svg' style={{ maxWidth: "100px" }} />
                 </div>
                 <h2 className="text-center fw-bold">Log In</h2>
                 <form onSubmit={handleFormSubmit}>
@@ -81,7 +79,7 @@ function StartPage() {
                     />
                   </div>
                   <button type="submit" className="btn btn-primary w-100">
-                    Log In
+                    <Link to='/home'>Log in</Link>
                   </button>
                 </form>
                 {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
