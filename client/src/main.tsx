@@ -10,6 +10,8 @@ import IndividualPage from './pages/IndividualPage.js'
 import SignUp from './pages/SignUp.js'
 import StartPage from './pages/StartPage.js'
 import React from 'react'
+import PrivateRoute from './components/PrivateRoute.js'
+import SavedPlaces from './pages/SavedPlaces.js'
 
 const router = createBrowserRouter([
   {
@@ -26,15 +28,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/home',
-        element: <HomePage />
+        element: <PrivateRoute><HomePage /></PrivateRoute>
       },
       {
         path: '/home/:city',
-        element: <IndividualPage/>
+        element: <PrivateRoute><IndividualPage/></PrivateRoute>
       },
       {
         path: '/saved',
-        element: <SavedPages />
+        element: <PrivateRoute><SavedPlaces /></PrivateRoute>
       }
     ]
   }

@@ -7,6 +7,7 @@ import WeatherWidget from "../components/WeatherWidget";
 import '../assets/styles/individualPage.css'
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate} from "react-router-dom";
+import TopBar from "../components/TopBar";
 
 function IndividualPage() {
   const {state} = useLocation();
@@ -50,6 +51,7 @@ function IndividualPage() {
 
   return (
     <div className="wholePage">
+      <TopBar />
       <Button onClick={() => navigate(-1)}>Back</Button> 
       <Row>
           <Col className="col-1">

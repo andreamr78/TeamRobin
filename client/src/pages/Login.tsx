@@ -6,6 +6,7 @@ import '../assets/styles/login.css'
 import Auth from '../utils/auth';
 import type { User } from '../models/User.js';
 import { LOGIN_USER } from '../utils/mutations.js'; // Import LOGIN_USER mutation
+import { Link } from 'react-router-dom';
 
 const LoginForm = ({}: { handleModalClose: () => void }) => {
   const [userFormData, setUserFormData] = useState<User>({ email: '', password: '', savedDestinations: [] }); // Removed username
@@ -87,7 +88,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
-          Submit
+            <Link to='/home'>Log in</Link>
         </Button>
       </Form>
     </div>

@@ -6,6 +6,7 @@ import './SignUp.css';
 import Auth from '../utils/auth.js';
 import type { User } from '../models/User.js';
 import { ADD_USER } from '../utils/mutations.js'; // Import the ADD_USER mutation
+import { Link, Navigate } from 'react-router-dom';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const SignupForm = ({}: { handleModalClose: () => void }) => {
@@ -110,7 +111,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         disabled={!(userFormData.username && userFormData.email && userFormData.password)}
         type='submit'
         variant='success'>
-        Submit
+          <Link to='/home'>Submit</Link>
       </Button>
     </Form>
   </div>
