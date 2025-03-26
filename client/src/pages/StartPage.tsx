@@ -2,7 +2,7 @@ import React, { useState, type FormEvent, type ChangeEvent } from 'react';
 import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
-
+import '../assets/styles/login.css'
 //arreglar el logo
 
 function StartPage() {
@@ -40,13 +40,10 @@ function StartPage() {
   };
 
   return (
-    <div 
-      className="d-flex justify-content-center align-items-center vh-100 bg-cover" 
-      style={{ backgroundImage: "url('/background.jpg')" }}
-    >
-      <div className="container">
+    <div className="container-1">
+      <div>
         <div className="row justify-content-center">
-          <div className="col-md-8">
+          <div className="col-md-8 cards-container">
             <div className="row bg-light bg-opacity-75 p-4 rounded shadow-lg">
               
               {/* Left: Login Form */}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-
+import '../assets/styles/login.css'
 import Auth from '../utils/auth';
 import type { User } from '../models/User.js';
 import { LOGIN_USER } from '../utils/mutations.js'; // Import LOGIN_USER mutation
@@ -53,7 +53,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   };
 
   return (
-    <>
+    <div >
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your login credentials!
@@ -90,7 +90,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
           Submit
         </Button>
       </Form>
-    </>
+    </div>
   );
 };
 
