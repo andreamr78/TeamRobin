@@ -9,7 +9,7 @@ import { Card, Button, Container } from 'react-bootstrap';
 import '../assets/styles/homePage.css'
 
 function SavedPlaces() {
-  const { loading, data } = useQuery(GET_ME);
+  const {  data } = useQuery(GET_ME);
   const [removeTravel] = useMutation(REMOVE_DESTINATION);
   const userData = data?.me || {
     username: '',

@@ -8,11 +8,15 @@ export const GET_ME = gql`
       email
       savedDestinations {
         travelId
-        location
+        photos
+        price
         description
-        ticketPrice
-        hotelPrice
-        link
+        weather
+        activities
+        videos
+        temperature
+        country
+        city
       }
     }
   }

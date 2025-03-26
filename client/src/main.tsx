@@ -29,8 +29,8 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: '/:location',
-        element: <IndividualPage />
+        path: '/home/:city',
+        element: <IndividualPage/>
       },
       {
         path: '/saved',
