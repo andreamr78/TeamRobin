@@ -5,8 +5,9 @@ import { useMutation } from '@apollo/client';
 import './SignUp.css';
 import Auth from '../utils/auth.js';
 import type { User } from '../models/User.js';
-import { ADD_USER } from '../utils/mutations.js'; // Import the ADD_USER mutation
+import { ADD_USER } from '../utils/mutations.js'; 
 import { useNavigate } from 'react-router-dom';
+
 
 const SignupForm = ({}: { handleModalClose: () => void }) => {
   const navigate = useNavigate(); // Add navigate hook
@@ -17,7 +18,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [addUserMutation] = useMutation(ADD_USER); // Use the ADD_USER mutation
+  const [addUserMutation] = useMutation(ADD_USER); 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -25,7 +26,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault(); 
 
     try {
       const { data } = await addUserMutation({
@@ -95,7 +96,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         disabled={!(userFormData.username && userFormData.email && userFormData.password)}
         type='submit'
         variant='success'>
-        Submit
+          <Link to='/home'>Submit</Link>
       </Button>
     </Form>
   </div>

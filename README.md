@@ -64,13 +64,15 @@ Through this project, developers gain experience in agile development methodolog
    npm start
    ```
 
-## Usage
+## Usage 
 - Sign up or log in to access personalized features.
 - Search for a destination to explore information about attractions.
 - View the weather forecast for your chosen locations.
 - Save your favorite destinations for quick access later.
 - Check currency exchange rates for international travel.
 - Read and write reviews about travel destinations.
+
+### [Deployed page](https://teamrobin.onrender.com/)
 
 ## Team Members
 - Andrea
@@ -93,68 +95,3 @@ Contributions are welcome! If you'd like to contribute:
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-### Prerequisites
-- Node.js installed on your system
-- MongoDB instance running (local or cloud-based, e.g., MongoDB Atlas)
-
-### Steps
-To run both frontend and backend servers concurrently, you can use **concurrently**. Install it globally or add it to your project dependencies:
-```sh
-npm install -g concurrently
-```
-Or install it as a dev dependency:
-```sh
-npm install concurrently --save-dev
-```
-Then, modify the scripts section in your `package.json` to include:
-```json
-"scripts": {
-  "start": "concurrently \"cd backend && npm start\" \"cd frontend && npm start\""
-}
-```
-You can then start both servers with:
-```sh
-npm start
-```
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/andreamr78/TeamRobin.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd TeamRobin
-   ```
-3. Install dependencies:
-   ```sh
-   npm install
-   ```
-4. Start the backend server:
-   ```sh
-   cd backend
-   npm start
-   ```
-5. Start the frontend:
-   ```sh
-   cd frontend
-   npm start
-   ```
-
-## Usage
-- Sign up or log in to access personalized features.
-- Search for a destination to explore information about attractions.
-- View the weather forecast for your chosen locations.
-- Save your favorite destinations for quick access later.
-- Check currency exchange rates for international travel.
-- Read and write reviews about travel destinations.
-
-## Contribution
-Contributions are welcome! If you'd like to contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-branch`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-branch`).
-5. Open a pull request.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-

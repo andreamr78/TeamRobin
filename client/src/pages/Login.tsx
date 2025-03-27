@@ -5,16 +5,16 @@ import { useMutation } from '@apollo/client';
 import '../assets/styles/login.css'
 import Auth from '../utils/auth';
 import type { User } from '../models/User.js';
-import { LOGIN_USER } from '../utils/mutations.js'; // Import LOGIN_USER mutation
+import { LOGIN_USER } from '../utils/mutations.js'; 
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({}: { handleModalClose: () => void }) => {
-  const [userFormData, setUserFormData] = useState<User>({ email: '', password: '', savedDestinations: [] }); // Removed username
+  const [userFormData, setUserFormData] = useState<User>({ email: '', password: '', savedDestinations: [] }); 
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate(); // Add navigate hook
 
-  const [loginUserMutation] = useMutation(LOGIN_USER); // Use LOGIN_USER mutation
+  const [loginUserMutation] = useMutation(LOGIN_USER); 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -22,7 +22,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault(); 
 
     try {
       const { data } = await loginUserMutation({
