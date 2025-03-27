@@ -1,11 +1,9 @@
 import ReactDOM from 'react-dom/client'
-
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
 import HomePage from './pages/HomePage.js'
-import SavedPages from './pages/SavedPlaces.js'
 import IndividualPage from './pages/IndividualPage.js'
 import SignUp from './pages/SignUp.js'
 import StartPage from './pages/StartPage.js'
@@ -21,10 +19,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <StartPage />
-      }, {
+        element: localStorage.getItem('id_token') ? <Navigate to="/home" /> : <StartPage />,
+      },
+      {
         path: '/SignUp',
-        element: <SignUp />
+        element: <SignUp handleModalClose={() => console.log('Modal closed')} />
       },
       {
         path: '/home',
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/home/:city',
-        element: <PrivateRoute><IndividualPage/></PrivateRoute>
+        element: <PrivateRoute><IndividualPage /></PrivateRoute>
       },
       {
         path: '/saved',
@@ -40,8 +39,8 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <RouterProvider router={router} />
-)
+);

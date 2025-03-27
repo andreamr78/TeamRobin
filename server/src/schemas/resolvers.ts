@@ -6,6 +6,7 @@ interface AddUserArgs {
     username: string;
     email: string;
     password: string;
+    savedDestinations?: any[];
   }
 }
 
@@ -51,10 +52,26 @@ const resolvers = {
 
     Mutation: {
       addUser: async (_: any, { input }: AddUserArgs) => {
-        const { username, email, password } = input;
-        const user = await User.create({ username, email, password });
-        const token = signToken(user.username, user.email, user._id);
-        return { token, user };
+        try {
+          const { username, email, password, savedDestinations } = input;
+
+          // Check if the user already exists
+          const existingUser = await User.findOne({ email });
+          if (existingUser) {
+            throw new Error('User with this email already exists');
+          }
+
+          // Create a new user
+          const user = await User.create({ username, email, password, savedDestinations });
+
+          // Generate a token
+          const token = signToken(user.username, user.email, user._id);
+
+          return { token, user };
+        } catch (err) {
+          console.error('Error in addUser resolver:', err);
+          throw new Error('Failed to create user');
+        }
       },
       
       login: async (_parent: any, { email, password }: LoginUserArgs) => {

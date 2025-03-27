@@ -23,7 +23,8 @@
     "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^4.0.0",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.0.0",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
