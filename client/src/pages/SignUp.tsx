@@ -6,10 +6,10 @@ import './SignUp.css';
 import Auth from '../utils/auth.js';
 import type { User } from '../models/User.js';
 import { ADD_USER } from '../utils/mutations.js'; // Import the ADD_USER mutation
-import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const SignupForm = ({}: { handleModalClose: () => void }) => {
+  const navigate = useNavigate(); // Add navigate hook
   // set initial form state
   const [userFormData, setUserFormData] = useState<User>({ username: '', email: '', password: '', savedDestinations: [] });
   // set state for form validation
@@ -25,40 +25,24 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault(); // Prevent default form submission behavior
 
     try {
       const { data } = await addUserMutation({
-        variables: { input: { ...userFormData } }, // Wrap userFormData in input
+        variables: { input: { ...userFormData } },
       });
 
       if (!data?.addUser.token) {
-        throw new Error('something went wrong!');
+        throw new Error('Failed to receive token');
       }
 
-      Auth.login(data.addUser.token);
+      Auth.login(data.addUser.token); // Save token to localStorage
+      navigate('/home'); // Redirect to homepage
     } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      console.error('Error during sign-up:', err); // Log errors
+      setShowAlert(true); // Show alert on error
     }
-
-    setUserFormData({
-      username: '',
-      email: '',
-      password: '',
-      savedDestinations: [],
-    });
   };
-
-
-
 
   return (
     <div className='sign-up-page'>
@@ -111,7 +95,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
         disabled={!(userFormData.username && userFormData.email && userFormData.password)}
         type='submit'
         variant='success'>
-          <Link to='/home'>Submit</Link>
+        Submit
       </Button>
     </Form>
   </div>

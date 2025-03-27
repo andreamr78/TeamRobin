@@ -6,12 +6,13 @@ import '../assets/styles/login.css'
 import Auth from '../utils/auth';
 import type { User } from '../models/User.js';
 import { LOGIN_USER } from '../utils/mutations.js'; // Import LOGIN_USER mutation
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({}: { handleModalClose: () => void }) => {
   const [userFormData, setUserFormData] = useState<User>({ email: '', password: '', savedDestinations: [] }); // Removed username
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate(); // Add navigate hook
 
   const [loginUserMutation] = useMutation(LOGIN_USER); // Use LOGIN_USER mutation
 
@@ -21,29 +22,23 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   };
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    //console.log(userFormData); // Debugging: Check if email and password are populated
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault(); // Prevent default form submission behavior
 
     try {
       const { data } = await loginUserMutation({
-        variables: { ...userFormData },
+        variables: { ...userFormData }, // Pass form data to the mutation
       });
 
       if (!data?.login.token) {
-        throw new Error('something went wrong!');
+        throw new Error('Failed to receive token');
       }
 
-      Auth.login(data.login.token);
+      console.log('Login successful:', data); // Log success
+      Auth.login(data.login.token); // Save token and log in
+      navigate('/home'); // Redirect to homepage
     } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+      console.error('Error during login:', err); // Log errors
+      setShowAlert(true); // Show alert on error
     }
 
     setUserFormData({
@@ -88,7 +83,7 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
-            <Link to='/home'>Log in</Link>
+            Log in
         </Button>
       </Form>
     </div>

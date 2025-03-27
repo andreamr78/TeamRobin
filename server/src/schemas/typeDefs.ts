@@ -10,10 +10,10 @@ const typeDefs = gql`
   }
 
   input UserInput {
-    username: String
-    email: String
-    password: String
-    savedDestinations: [travelInput]
+    username: String!
+    email: String!
+    password: String!
+    savedDestinations: [travelInput] 
   }
 
   input travelInput {
